@@ -1,8 +1,8 @@
-# 🚀 Management.Rework - PFE Project
+#  Management.Rework - PFE Project
 
 ## 🎓 Projet de Fin d'Études (PFE) 2025-2026
 
-**Cloud-Native Microservices Platform with AI-Powered DevOps**
+**Cloud-Native Microservices Platform with SRE-Driven DevOps & Progressive Delivery**
 
 ![Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-Pipeline-0078D7)
 ![AKS](https://img.shields.io/badge/AKS-Kubernetes-326CE5)
