@@ -199,6 +199,29 @@ text
 - **Grafana**: Dashboards and visualization
 - **Node Exporter**: Node metrics
 
+
+### 📈 Prometheus Metrics & Queries
+
+#### Key Metrics Tracked
+
+| Metric | Description | PromQL Query |
+|--------|-------------|--------------|
+| **Request Rate** | Total requests per second | `sum(rate(istio_requests_total[5m]))` |
+| **Error Rate** | Failed requests percentage | `sum(rate(istio_requests_total{response_code=~"5.."}[5m])) / sum(rate(istio_requests_total[5m])) * 100` |
+| **Latency P95** | 95th percentile response time | `histogram_quantile(0.95, sum(rate(istio_request_duration_milliseconds_bucket[5m])) by (le))` |
+| **Traffic Split** | v1 vs v2 distribution | `sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v1"}[1m])) vs sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v2"}[1m]))` |
+
+#### Real-Time Queries Used in This Project
+
+**1. Canary Traffic Split (v1 vs v2):**
+promql
+# v1 (stable) traffic
+sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v1"}[1m]))
+
+# v2 (canary) traffic
+sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v2"}[1m]))
+
+
 ---
 
 ## 🚀 Canary Rollback in Action (Live Capture)
