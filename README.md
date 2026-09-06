@@ -29,7 +29,7 @@
 
 ## 🏗️ Architecture
 
-![Architecture](docs/screenshots/architecture/architecture-overview.png)
+![Architecture Overview](docs/screenshots/architecture/architecture-overview.gif)
 
 ### Microservices
 
