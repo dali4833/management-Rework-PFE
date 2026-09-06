@@ -201,25 +201,87 @@ text
 
 
 ### 📈 Prometheus Metrics & Queries
-
+ 
+Prometheus is used for **real-time metrics collection** across all microservices, Istio service mesh, and AKS nodes. Below are the key queries used for monitoring canary deployments.
+ 
 #### Key Metrics Tracked
-
+ 
 | Metric | Description | PromQL Query |
 |--------|-------------|--------------|
 | **Request Rate** | Total requests per second | `sum(rate(istio_requests_total[5m]))` |
 | **Error Rate** | Failed requests percentage | `sum(rate(istio_requests_total{response_code=~"5.."}[5m])) / sum(rate(istio_requests_total[5m])) * 100` |
 | **Latency P95** | 95th percentile response time | `histogram_quantile(0.95, sum(rate(istio_request_duration_milliseconds_bucket[5m])) by (le))` |
 | **Traffic Split** | v1 vs v2 distribution | `sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v1"}[1m])) vs sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v2"}[1m]))` |
-
+ 
 #### Real-Time Queries Used in This Project
-
+ 
 **1. Canary Traffic Split (v1 vs v2):**
-promql
+ 
+```promql
 # v1 (stable) traffic
 sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v1"}[1m]))
-
+ 
 # v2 (canary) traffic
 sum(rate(istio_requests_total{destination_service="admin-api", destination_version="v2"}[1m]))
+```
+ 
+| Component | Description |
+|-----------|-------------|
+| `destination_service="admin-api"` | Filters traffic to Admin API |
+| `destination_version="v1"/"v2"` | Traffic split between versions |
+| `rate( ... [1m])` | Requests per second over 1 minute |
+ 
+**2. Error Rate Monitoring (0% during canary):**
+ 
+This query calculates the percentage of failed requests (HTTP 5xx errors) during the canary rollout. A 0% error rate confirms the new version is healthy.
+ 
+```promql
+sum(rate(istio_requests_total{response_code=~"5.."}[1m])) / sum(rate(istio_requests_total[1m])) * 100
+```
+ 
+| Component | Description |
+|-----------|-------------|
+| `response_code=~"5.."` | Filters HTTP 5xx errors (500-599) |
+| `rate( ... [1m])` | Rate of requests per second over 1 minute |
+| `* 100` | Converts to percentage |
+ 
+**3. Service Latency (P50/P95/P99):**
+ 
+These queries track response time percentiles, ensuring the canary version doesn't introduce performance degradation.
+ 
+```promql
+# P50 (Median) - 50% of requests are faster than this
+histogram_quantile(0.50, sum(rate(istio_request_duration_milliseconds_bucket[1m])) by (le))
+ 
+# P95 - 95% of requests are faster than this
+histogram_quantile(0.95, sum(rate(istio_request_duration_milliseconds_bucket[1m])) by (le))
+ 
+# P99 - 99% of requests are faster than this
+histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket[1m])) by (le))
+```
+ 
+| Percentile | What It Measures | Why It Matters |
+|------------|-------------------|-----------------|
+| P50 | Median response time | Typical user experience |
+| P95 | 95th percentile | Most users experience this or better |
+| P99 | 99th percentile | Worst-case latency for 1% of users |
+ 
+**4. Node CPU & Memory Usage:**
+ 
+These queries monitor the underlying AKS node health during canary deployments.
+ 
+```promql
+# CPU usage percentage
+100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
+ 
+# Memory usage percentage
+100 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100)
+```
+ 
+| Metric | What It Measures | Why It Matters |
+|--------|--------------------|------------------|
+| CPU Usage | Percentage of CPU in use | Detects resource saturation |
+| Memory Usage | Percentage of RAM in use | Detects memory leaks or exhaustion |
 
 
 ---
