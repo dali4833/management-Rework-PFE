@@ -147,7 +147,7 @@
 ---
 ## 🚀 Canary Rollback in Action (Live Capture)
 
-![Canary Rollback](docs/screenshots/monitoring/grafana-canary-rollback.png)
+![Canary Rollback](docs/screenshots/monitoring/grafana-rollout-metrics.png)
 
 *Figure: admin-api canary rollout automatically detected a regression and rolled back — captured live from the Grafana dashboard.*
 
@@ -160,6 +160,10 @@
 | 🔵 Steady 50/50 | 19:54:00 – 19:55:45 | 105s | Split holds evenly (3.02 vs 3.04 req/s) while analysis runs |
 | 🔴 Rollback | 19:55:45 – 19:56:30 | 45s | Analysis fails a check, controller reverts weight, 50% → 0% |
 | 🔘 Recovered | 19:56:30 onward | — | v1 back to 100% of traffic, canary fully drained |
+
+
+📈 **[View the interactive rollback chart](docs/rollouts-metrics.html)** — download and open in browser, or view live if GitHub Pages is enabled on this repo.
+
 
 Total request volume stayed constant (~6.2 req/s) throughout — the pipeline shifted *routing weight*, not overall load, confirming the split was managed cleanly by the mesh rather than causing any user-facing disruption.
 
