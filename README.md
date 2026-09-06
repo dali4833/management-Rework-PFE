@@ -137,7 +137,7 @@
 
 ### 📊 Grafana Detection - Rollback Analysis
 
-![Canary Rollback Analysis](docs/screenshots/monitoring/grafana-rollback-analysis.png)
+![Canary Rollback Analysis](docs/screenshots/monitoring/grafana-rollout-metrics.png)
 
 *Figure: admin-api canary rollout automatically detected a regression and rolled back — captured live from the Grafana dashboard.*
 
@@ -160,7 +160,7 @@
 
 ### 📊 Interactive HTML Chart
 
-[![Rollout Metrics Chart](docs/screenshots/monitoring/grafana-rollout-metrics.png)](https://dali4833.github.io/management-Rework-PFE/docs/rollouts-metrics.html)
+[![Rollout Metrics Chart](docs/screenshots/monitoring/grafana-rollback-analysis.png)](https://dali4833.github.io/management-Rework-PFE/docs/rollouts-metrics.html)
 
 *Click the image to open the interactive chart in your browser*
 
