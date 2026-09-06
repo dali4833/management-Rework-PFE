@@ -181,14 +181,14 @@ Total request volume stayed constant (~6.2 req/s) throughout — the pipeline sh
 The canary's automated analysis step flagged a regression during the steady-state window and triggered a rollback, restoring 100% of traffic to the stable version with zero downtime. This demonstrates the full progressive-delivery loop working end-to-end: **deploy → analyze → detect → rollback**, without manual intervention.
 
 ---
----
+
 
 ## 👨‍💻 Author
 
 **Mohamed Ali**
 
-- 📧 Email: your.email@example.com
-- 🔗 LinkedIn: linkedin.com/in/your-profile
+- 📧 Email: Mohamed Ali hamraoui 
+- 🔗 LinkedIn: www.linkedin.com/in/mohamed-ali-hamraoui-303662255
 - 🐙 GitHub: [dali4833](https://github.com/dali4833)
 
 PFE Project 2025-2026
