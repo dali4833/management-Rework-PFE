@@ -181,31 +181,6 @@ Total request volume stayed constant (~6.2 req/s) throughout — the pipeline sh
 The canary's automated analysis step flagged a regression during the steady-state window and triggered a rollback, restoring 100% of traffic to the stable version with zero downtime. This demonstrates the full progressive-delivery loop working end-to-end: **deploy → analyze → detect → rollback**, without manual intervention.
 
 ---
-
-## 🚀 Quick Start
-
-\`\`\`bash
-# Clone
-git clone https://github.com/dali4833/management-Rework-PFE.git
-cd management-Rework-PFE
-
-# Deploy Infrastructure
-cd infrastructure/terraform/environments/dev
-terraform init
-terraform apply
-
-# Deploy Applications
-cd ~/aks/ansible
-ansible-playbook playbooks/03-deploy-apps.yml
-\`\`\`
-
----
-
-## 📚 Documentation
-
-- [Architecture Deep Dive](docs/architecture.md)
-- [Deployment Guide](docs/deployment.md)
-
 ---
 
 ## 👨‍💻 Author
@@ -217,12 +192,6 @@ ansible-playbook playbooks/03-deploy-apps.yml
 - 🐙 GitHub: [dali4833](https://github.com/dali4833)
 
 PFE Project 2025-2026
-
----
-
-## 📝 License
-
-MIT License - see LICENSE
 
 ---
 
