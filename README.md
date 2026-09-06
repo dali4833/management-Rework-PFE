@@ -149,8 +149,7 @@
 | 🔴 Rollback | 19:55:45 – 19:56:30 | 45s | Analysis fails a check, controller reverts weight, 50% → 0% |
 | 🔘 Recovered | 19:56:30 onward | — | v1 back to 100% of traffic, canary fully drained |
 
-[![Rollout Metrics Chart](docs/screenshots/monitoring/grafana-rollout-metrics.png)](https://dali4833.github.io/management-Rework-PFE/docs/rollouts-metrics.html)
-
+[![Canary Rollback Analysis](docs/screenshots/monitoring/grafana-rollback-analysis.png)](https://dali4833.github.io/management-Rework-PFE/docs/rollouts-metrics.html)
 *Click the image to open the interactive chart in your browser*
 
 Total request volume stayed constant (~6.2 req/s) throughout — the pipeline shifted *routing weight*, not overall load, confirming the split was managed cleanly by the mesh rather than causing any user-facing disruption.
