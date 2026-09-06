@@ -19,19 +19,32 @@
 
 ## 📋 Overview
 
-**Management.Rework** is a production-grade microservices platform built as my final year engineering project.
+**Management.Rework** is a **production-grade microservices platform** built as my final year engineering project, demonstrating **SRE-driven DevOps** practices on Azure.
 
-### Key Features
+### 🚀 Key Features
 
-- ✅ **Infrastructure as Code** (Terraform) on Azure
-- ✅ **CI/CD Pipeline** with 5 automated stages
-- ✅ **Service Mesh** (Istio) with Kiali visualization
-- ✅ **AI-Powered Operations** (Ollama + Mistral)
-- ✅ **Shift-Left Security** (Trivy + SonarCloud)
-- ✅ **Canary Deployments** (10% → 50% → 100%)
-- ✅ **Full Observability** (Prometheus + Grafana)
+| Feature | Implementation |
+|---------|----------------|
+| ✅ **Infrastructure as Code** | Terraform + Ansible on Azure (AKS, VNet, MySQL, ACR, Key Vault) |
+| ✅ **CI/CD Pipeline** | 5-stage Azure DevOps with AI-powered security gates |
+| ✅ **Service Mesh** | Istio with Kiali visualization and traffic management |
+| ✅ **AI-Powered Operations** | Ollama + Mistral 7B for intelligent analysis |
+| ✅ **Shift-Left Security** | Trivy container scanning + SonarCloud quality gates |
+| ✅ **Progressive Delivery** | Canary deployments (10% → 50% → 100%) with auto-rollback |
+| ✅ **Full Observability** | Prometheus metrics + Grafana dashboards + Node Exporter |
+| ✅ **Zero-Downtime** | Rolling updates and canary deployments |
+| ✅ **Auto-Rollback** | Automated regression detection and rollback |
 
----
+### 🎯 What This Project Demonstrates
+
+| SRE Principle | Implementation |
+|---------------|----------------|
+| 📊 **Observability** | Prometheus, Grafana, Kiali, Loki |
+| 🔄 **Automation** | Fully automated CI/CD with Azure DevOps |
+| 🛡️ **Resilience** | Auto-rollback, canary deployments, circuit breakers |
+| 📈 **SLIs/SLOs** | Latency, error rates, traffic metrics |
+| 🔒 **Security** | Shift-Left scanning, Key Vault, mTLS |
+| 🤖 **AI Integration** | Ollama for intelligent analysis and insights |
 
 ## 🏗️ Architecture
 
