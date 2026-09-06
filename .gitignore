@@ -3,17 +3,27 @@ bin/
 obj/
 *.user
 *.suo
+*.cache
+*.dll
+*.exe
 
 # Node
 node_modules/
+npm-debug.log
 
 # Terraform
 .terraform/
 *.tfstate
+*.tfstate.backup
+
+# Python
+__pycache__/
+*.pyc
 
 # IDE
 .vscode/
 .vs/
+.idea/
 
 # OS
 .DS_Store
@@ -23,6 +33,7 @@ Thumbs.db
 *.tmp
 *.log
 *.bak
+*.backup
 
 # Secrets
 *.tfvars
