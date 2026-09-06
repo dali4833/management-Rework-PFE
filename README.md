@@ -8,6 +8,12 @@
 ![AKS](https://img.shields.io/badge/AKS-Kubernetes-326CE5)
 ![Istio](https://img.shields.io/badge/Istio-Service%20Mesh-466BB0)
 ![SonarCloud](https://img.shields.io/badge/SonarCloud-Quality%20Gate-FD3456)
+![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC)
+![Ansible](https://img.shields.io/badge/Ansible-Automation-EE0000)
+![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C)
+![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800)
+![Trivy](https://img.shields.io/badge/Trivy-Security-00B4D8)
+![Kiali](https://img.shields.io/badge/Kiali-Service%20Mesh-00D2FF)
 
 ---
 
