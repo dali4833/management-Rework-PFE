@@ -145,19 +145,26 @@
 - **Node Exporter**: Node metrics
 
 ---
+## 🚀 Canary Rollback in Action (Live Capture)
 
-## 🚀 Quick Start
+![Canary Rollback](docs/screenshots/monitoring/grafana-canary-rollback.png)
 
-```bash
-# Clone
-git clone https://github.com/dali4833/management-Rework-PFE.git
-cd management-Rework-PFE
+*Figure: admin-api canary rollout automatically detected a regression and rolled back — captured live from the Grafana dashboard.*
 
-# Deploy Infrastructure
-cd infrastructure/terraform/environments/dev
-terraform init
-terraform apply
+**Timeline breakdown:**
 
-# Deploy Applications
-cd ~/aks/ansible
-ansible-playbook playbooks/03-deploy-apps.yml
+| Interval | Time range | Duration | What's happening |
+|----------|------------|----------|-------------------|
+| 🔘 Baseline | 19:52:00 – 19:53:15 | 75s | v1 handles 100% of traffic, canary idle at near-zero |
+| 🟠 Ramp-up | 19:53:15 – 19:54:00 | 45s | Controller shifts weight from v1 to v2, 0% → 50% |
+| 🔵 Steady 50/50 | 19:54:00 – 19:55:45 | 105s | Split holds evenly (3.02 vs 3.04 req/s) while analysis runs |
+| 🔴 Rollback | 19:55:45 – 19:56:30 | 45s | Analysis fails a check, controller reverts weight, 50% → 0% |
+| 🔘 Recovered | 19:56:30 onward | — | v1 back to 100% of traffic, canary fully drained |
+
+Total request volume stayed constant (~6.2 req/s) throughout — the pipeline shifted *routing weight*, not overall load, confirming the split was managed cleanly by the mesh rather than causing any user-facing disruption.
+
+The canary's automated analysis step flagged a regression during the steady-state window and triggered a rollback, restoring 100% of traffic to the stable version with zero downtime. This demonstrates the full progressive-delivery loop working end-to-end: **deploy → analyze → detect → rollback**, without manual intervention.
+
+
+
+
