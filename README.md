@@ -145,6 +145,24 @@
 - **Node Exporter**: Node metrics
 
 ---
+
+## 🚀 Canary Rollout Metrics
+
+### Admin API - Traffic Split (v1 vs v2)
+
+![Traffic Split](docs/screenshots/monitoring/grafana-traffic-split.png)
+
+*Figure: Admin API canary deployment showing gradual traffic migration from v1 (stable) to v2 (canary)*
+
+| Phase | v1 Traffic | v2 Traffic | Status |
+|-------|------------|------------|--------|
+| **Start** | ~6 req/s | 0 req/s | 🔵 100% v1 |
+| **Canary (10%)** | ~5.4 req/s | ~0.6 req/s | 🟢 Testing |
+| **Half (50%)** | ~3 req/s | ~3 req/s | 🟢 50/50 split |
+| **Full** | 0 req/s | ~6 req/s | 🟢 100% v2 |
+
+---
+
 ## 🚀 Canary Rollback in Action (Live Capture)
 
 ![Canary Rollback](docs/screenshots/monitoring/grafana-rollout-metrics.png)
@@ -162,8 +180,10 @@
 | 🔘 Recovered | 19:56:30 onward | — | v1 back to 100% of traffic, canary fully drained |
 
 
-📈 **[View the interactive rollback chart](docs/rollouts-metrics.html)** — download and open in browser, or view live if GitHub Pages is enabled on this repo.
 
+[![Rollout Metrics Chart](docs/screenshots/monitoring/grafana-rollout-metrics.png)](docs/rollouts-metrics.html)
+
+*Click the image to download and open the interactive chart in your browser*
 
 Total request volume stayed constant (~6.2 req/s) throughout — the pipeline shifted *routing weight*, not overall load, confirming the split was managed cleanly by the mesh rather than causing any user-facing disruption.
 
