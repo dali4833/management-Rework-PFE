@@ -335,7 +335,7 @@ The canary's automated analysis step flagged a regression during the steady-stat
 
 ### 📊 Intervention API - Canary Rollback with SLO Checks
 
-![Intervention API Canary](docs/screenshots/monitoring/intervention-api-canary.png)
+![Intervention API Canary](docs/screenshots/monitoring/grafana-intervention-api-canary.png)
 
 *Figure: Intervention API canary deployment with automated SLO checks (error rate < 1%, P95 latency < 200ms)*
 
