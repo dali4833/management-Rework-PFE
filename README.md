@@ -1,5 +1,5 @@
 #  Management.Rework - PFE Project
-> 🚀 **"From Code to Production with Zero-Downtime"**   ← PUT IT RIGHT HERE
+ 🚀 **"From Code to Production with Zero-Downtime"**  
 
 ## 🎓 Projet de Fin d'Études (PFE) 2025-2026
 
