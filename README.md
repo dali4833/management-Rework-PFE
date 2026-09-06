@@ -64,6 +64,33 @@
 
 ---
 
+## 🔄 Canary Release Flow
+
+![Canary Routing Diagram](docs/screenshots/architecture/routing-diagram.gif)
+
+*Figure: Istio-based canary release flow showing traffic routing between v1 (stable) and v2 (canary) with progressive weight shifting*
+
+### How Canary Routing Works
+
+| Component | Purpose |
+|-----------|---------|
+| **Istio Gateway** | Entry point for external traffic |
+| **VirtualService** | Defines routing rules (hosts, ports) |
+| **DestinationRule** | Traffic splitting weights (v1 vs v2) |
+| **mTLS** | Secure service-to-service communication |
+| **Tailscale VPN** | Secure external access |
+
+### Traffic Flow
+User → Ingress → Istio Gateway → VirtualService → DestinationRule → Pods
+
+text
+
+- **v1 (stable)**: 100% → 0% (gradually scaled down)
+- **v2 (canary)**: 0% → 100% (gradually scaled up)
+- **Auto-Rollback**: If regression detected, v2 goes back to 0%
+
+---
+
 ## 🛠️ Tech Stack
 
 | Category | Technologies |
