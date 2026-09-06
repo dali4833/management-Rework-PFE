@@ -1,4 +1,5 @@
 #  Management.Rework - PFE Project
+![Project Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen) 
  🚀 **"From Code to Production with Zero-Downtime"**  
 
 ## 🎓 Projet de Fin d'Études (PFE) 2025-2026
