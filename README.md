@@ -333,6 +333,27 @@ Total request volume stayed constant (~6.2 req/s) throughout — the pipeline sh
 
 The canary's automated analysis step flagged a regression during the steady-state window and triggered a rollback, restoring 100% of traffic to the stable version with zero downtime. This demonstrates the full progressive-delivery loop working end-to-end: **deploy → analyze → detect → rollback**, without manual intervention.
 
+### 📊 Intervention API - Canary Rollback with SLO Checks
+
+![Intervention API Canary](docs/screenshots/monitoring/intervention-api-canary.png)
+
+*Figure: Intervention API canary deployment with automated SLO checks (error rate < 1%, P95 latency < 200ms)*
+
+| Phase | v1 Traffic | v2 Traffic | Status |
+|-------|------------|------------|--------|
+| **Start** | ~13.2 req/s | 0 req/s | 🔵 100% v1 |
+| **Canary (10%)** | ~12 req/s | ~1.3 req/s | 🟢 SLO Check |
+| **Half (50%)** | ~6.6 req/s | ~6.7 req/s | 🟢 SLO Check |
+| **Rollback** | ~13.5 req/s | 0 req/s | 🔴 SLO Failed → Auto-Rollback |
+
+**SLO Validation:**
+
+| SLO | Threshold | Result |
+|-----|-----------|--------|
+| **Error Rate** | < 1% | ✅ Passed |
+| **P95 Latency** | < 200ms | ❌ **Failed** → Rollback triggered |
+
+The canary's automated SLO validation detected that P95 latency exceeded the 200ms threshold during the 50% traffic split, triggering an automatic rollback to restore 100% of traffic to the stable version with zero downtime.
 ---
 
 
