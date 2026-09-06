@@ -79,6 +79,26 @@
 
 ---
 
+## ☁️ Azure Infrastructure
+
+![Azure Portal - Resource Group](docs/screenshots/azure-portal/azure-resource-group.png)
+
+*Figure: Azure Resource Group showing all provisioned resources (AKS, ACR, MySQL, Key Vault, VNet, Load Balancers)*
+
+### Provisioned Azure Resources
+
+| Resource | Purpose |
+|----------|---------|
+| **AKS Cluster** | Kubernetes orchestration |
+| **ACR** | Container registry |
+| **MySQL Flexible Server** | Managed database |
+| **Key Vault** | Secrets management |
+| **VNet** | Network isolation |
+| **Load Balancers** | Internal + external traffic routing |
+| **Log Analytics** | Centralized logging |
+| **Managed Identities** | Secure authentication |
+
+---
 ## 📸 Screenshots
 
 ### AKS Cluster
