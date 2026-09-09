@@ -321,7 +321,7 @@ This Grafana dashboard captures a **fully successful canary deployment** using I
 
 ### 🎯 What This Means
 
-The successful canary deployment confirms that **v2 passed all SLO validations during the live test phase**:
+The successful canary deployment confirms that **v2 passed all SLO validations** during the live test phase:
 
 | Validation | Result |
 |------------|--------|
@@ -329,14 +329,84 @@ The successful canary deployment confirms that **v2 passed all SLO validations d
 | **P95 Latency** | ✅ < 200ms (passed) |
 | **Traffic Split** | ✅ 0% → 100% smoothly |
 
+---
+
+### 🔄 The Promotion Cycle: v1 = v2 (New Version is Now in v1)
+
+| Phase | v1 (Stable) | v2 (Canary) | What Happens |
+|-------|-------------|-------------|--------------|
+| **Before Canary** | 🔵 100% traffic (old code) | ⚪ 0% traffic (new code) | v1 runs the old version, v2 is the new candidate |
+| **During Canary** | 🔵 50% traffic | 🟡 50% traffic | Both versions split traffic for testing |
+| **SLO Validation** | — | ✅ **PASSED** | Error < 1%, Latency < 200ms |
+| **After Success** | 🟢 **100% traffic (NEW CODE)** | ⚪ 0% traffic (scaled down) | **v1 now runs the new version!** |
+
+---
+
+### 🎯 What This Means in Practice
+
+| Statement | Meaning |
+|-----------|---------|
+| **v1 now runs the new version** | The successful v2 code has been promoted and is now running in v1 |
+| **v2 is scaled down** | v2 is kept as a backup or for future canaries |
+| **All traffic goes to v1** | 100% of production traffic is now handled by v1 (with the new code) |
+
+---
+
+### 🧠 In Simple Terms
+
+> **Before Canary:**
+> ```
+> v1 = old version (100% traffic)
+> v2 = new version (0% traffic, being tested)
+> ```
+>
+> **After Canary Success:**
+> ```
+> v1 = new version (100% traffic)  ← The new code is now in v1!
+> v2 = backup (0% traffic)         ← The canary is scaled down
+> ```
+
 **This means:**
+- ✅ **The new version (v2) is now running in v1**
+- ✅ **All traffic goes to v1 with the new code**
+- ✅ **v2 is scaled down and kept as a backup**
+- ✅ **v1 = v2** (the new version is now the stable version)
 
-1. **v2 is now promoted to production** alongside v1
-2. **v2 is ready to handle 100% of production traffic**
-3. **v1 is scaled down** but kept as a fallback
-4. **The next release can now be deployed on v2** with the same confidence
+---
 
-This gives us the ability to **deploy another version on v2** with the new release, knowing that the SLO validation process will catch any regressions before they reach users.
+### 🔄 The Continuous Deployment Cycle
+Release 1.0: v1 (old code) ───┐
+│
+Release 1.1: v2 (new code) ──┼── passes SLO ──► v1 = new code (v2 merged into v1)
+│ v2 = backup
+Release 1.2: v3 (new code) ──┼── passes SLO ──► v1 = new code (v3 merged into v1)
+│ v2 = backup
+Release 1.3: v4 (new code) ──┘── passes SLO ──► v1 = new code (v4 merged into v1)
+v2 = backup
+
+Each successful canary version is merged into v1.
+--
+
+### 📊 Visual Summary
+
+| Before Canary | After Canary Success |
+|---------------|----------------------|
+| v1 = ❌ **Old Version** | v1 = ✅ **New Version** |
+| v2 = 🟡 **New Version (Tested)** | v2 = ⚪ **Backup (Scaled Down)** |
+| All traffic goes to v1 (old) | All traffic goes to v1 (new) |
+
+**The new version (v2) is now running in v1. All traffic goes to v1 with the new code.**
+
+---
+
+### 🚀 Why This is Important
+
+| Benefit | Explanation |
+|---------|-------------|
+| **Zero-Downtime** | Users never see downtime during the transition |
+| **Safe Rollout** | The new version is validated in production before full deployment |
+| **Easy Rollback** | If needed, we can quickly revert to the old version in v1 |
+| **Continuous Delivery** | Each new version can be safely promoted to v1 |
 
 ---
 
