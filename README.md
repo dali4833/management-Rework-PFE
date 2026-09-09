@@ -341,10 +341,10 @@ The canary's automated analysis step flagged a regression during the steady-stat
 
 | Phase | v1 Traffic | v2 Traffic | Status |
 |-------|------------|------------|--------|
-| **Start** | ~13.2 req/s | 0 req/s | 🔵 100% v1 |
-| **Canary (10%)** | ~12 req/s | ~1.3 req/s | 🟢 SLO Check |
-| **Half (50%)** | ~6.6 req/s | ~6.7 req/s | 🟢 SLO Check |
-| **Rollback** | ~13.5 req/s | 0 req/s | 🔴 SLO Failed → Auto-Rollback |
+| **Start** | ~17.0 req/s | 0 req/s | 🔵 100% v1 |
+| **Canary (10%)** | ~16.0 req/s | ~1.42 req/s | 🟢 SLO Check |
+| **Half (50%)** | ~9.0 req/s | ~9.0 req/s | 🟢 SLO Check |
+| **Rollback** | ~17.0 req/s | 0 req/s | 🔴 SLO Failed → Auto-Rollback |
 
 **SLO Validation:**
 
