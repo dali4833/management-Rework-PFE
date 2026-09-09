@@ -370,7 +370,7 @@ The canary's automated SLO validation detected that P95 latency exceeded the 200
 
 **Mohamed Ali**
 
-- 📧 Email: Mohamed Ali hamraoui 
+- 📧 Email: Mohamedali.hamraoui@esprit.tn
 - 🔗 LinkedIn: www.linkedin.com/in/mohamed-ali-hamraoui-303662255
 - 🐙 GitHub: [dali4833](https://github.com/dali4833)
 
