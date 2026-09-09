@@ -286,36 +286,37 @@ These queries monitor the underlying AKS node health during canary deployments.
 
 ---
 
-## 🚀 Canary Rollback in Action (Live Capture)
+### 🚀 Admin API — Successful Canary Deployment (v1 → v2)
 
-### 📊 Grafana Detection - Rollback Analysis
+![Admin API — Traffic Split v1 vs v2](docs/screenshots/monitoring/grafana-traffic-splitg.png)
 
-![Canary Rollback Analysis](docs/screenshots/monitoring/grafana-rollout-metrics.png)
+*Figure: Successful canary deployment showing gradual traffic migration from v1 (stable) to v2 (canary)*
 
-*Figure: admin-api canary rollout automatically detected a regression and rolled back — captured live from the Grafana dashboard.*
+This Grafana dashboard captures a **fully successful canary deployment** using Istio's traffic management. Traffic is progressively shifted from the stable version (v1) to the new version (v2) without any rollback.
 
 ---
 
-### 📊 Traffic Split (v1 vs v2)
-
-![Traffic Split](docs/screenshots/monitoring/grafana-traffic-split.png)
-
-*Figure: Admin API canary deployment showing gradual traffic migration from v1 (stable) to v2 (canary)*
+### 📊 Traffic Split Progression
 
 | Phase | v1 Traffic | v2 Traffic | Status |
 |-------|------------|------------|--------|
-| **Start** | ~6 req/s | 0 req/s | 🔵 100% v1 |
-| **Canary (10%)** | ~5.4 req/s | ~0.6 req/s | 🟢 Testing |
-| **Half (50%)** | ~3 req/s | ~3 req/s | 🟢 50/50 split |
-| **Full** | 0 req/s | ~6 req/s | 🟢 100% v2 |
+| **Start** | ~4.5 req/s | 0 req/s | 🔵 100% v1 |
+| **Canary (10%)** | ~4.0 req/s | ~0.4 req/s | 🟢 Testing |
+| **Half (50%)** | ~2.2 req/s | ~2.2 req/s | 🟢 50/50 split |
+| **Full** | 0 req/s | ~4.0 req/s | 🟢 100% v2 |
 
 ---
 
-### 📊 Interactive HTML Chart
+### ✅ Why This Canary Succeeded
 
-[![Rollout Metrics Chart](docs/screenshots/monitoring/grafana-rollback-analysis.png)](https://dali4833.github.io/management-Rework-PFE/docs/rollouts-metrics.html)
+| Factor | Observation |
+|--------|-------------|
+| **v1 Traffic** | Gradually decreased from ~4.5 req/s → 0 req/s |
+| **v2 Traffic** | Gradually increased from 0 → ~4.0 req/s |
+| **Total Traffic** | Stable at ~4.5 req/s throughout deployment |
+| **No Rollback** | No regression detected, full switch completed |
 
-*Click the image to open the interactive chart in your browser*
+This demonstrates a clean, zero-downtime deployment where the new version (v2) handled the full traffic load without any SLO breaches or user-facing issues.
 
 ---
 
